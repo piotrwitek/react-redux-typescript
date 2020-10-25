@@ -127,6 +127,10 @@ exports[`MutableKeys testType<MutableKeys<ReadWriteProps>>() (type) should match
 
 exports[`NonFunctionKeys testType<NonFunctionKeys<MixedProps>>() (type) should match snapshot 1`] = `"\\"name\\" | \\"someKeys\\""`;
 
+exports[`NonNull testType<NonNull<null>>() (type) should match snapshot 1`] = `"never"`;
+
+exports[`NonNull testType<NonNull<string | null | undefined>>() (type) should match snapshot 1`] = `"string | undefined"`;
+
 exports[`NonUndefined testType<NonUndefined<string | null | undefined>>() (type) should match snapshot 1`] = `"string | null"`;
 
 exports[`NonUndefined testType<NonUndefined<undefined>>() (type) should match snapshot 1`] = `"never"`;

@@ -6,6 +6,7 @@ import {
   SymmetricDifference,
   FunctionKeys,
   NonUndefined,
+  NonNull,
   NonFunctionKeys,
   Omit,
   PickByValue,
@@ -102,6 +103,14 @@ type RequiredOptionalProps = {
   testType<NonUndefined<string | null | undefined>>();
   // @dts-jest:pass:snap
   testType<NonUndefined<undefined>>();
+}
+
+// @dts-jest:group NonNull
+{
+  // @dts-jest:pass:snap
+  testType<NonNull<string | null | undefined>>();
+  // @dts-jest:pass:snap
+  testType<NonNull<null>>();
 }
 
 // @dts-jest:group FunctionKeys

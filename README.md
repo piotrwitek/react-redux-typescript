@@ -101,6 +101,7 @@ We are open for contributions. If you're planning to contribute please make sure
 * [`Extract<A, B>`](#extracta-b) _(built-in)_
 * [`NonNullable<T>`](#nonnullablea) _(built-in)_
 * [`NonUndefined<T>`](#nonundefineda)
+* [`NonNull<T>`](#nonnulla)
 
 ## Object operators
 
@@ -301,6 +302,12 @@ Exclude `null` and `undefined` from set `A`
 ### `NonUndefined<A>`
 
 Exclude `undefined` from set `A`
+
+[⇧ back to top](#table-of-contents)
+
+### `NonNull<A>`
+
+Exclude `null` from set `A`
 
 [⇧ back to top](#table-of-contents)
 

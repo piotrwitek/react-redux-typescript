@@ -52,16 +52,25 @@ export type SymmetricDifference<A, B> = SetDifference<A | B, A & B>;
  * @desc Exclude undefined from set `A`
  * @example
  *   // Expect: "string | null"
- *   SymmetricDifference<string | null | undefined>;
+ *   NonUndefined<string | null | undefined>;
  */
-export type NonUndefined<A> = A extends undefined ? never : A;
+export type NonUndefined<A> = Exclude<A, undefined>;
+
+/**
+ * NonUndefined
+ * @desc Exclude undefined from set `A`
+ * @example
+ *   // Expect: "string | undefined"
+ *   NonNull<string | null | undefined>;
+ */
+export type NonNull<A> = Exclude<A, null>;
 
 /**
  * NonNullable
  * @desc Exclude undefined and null from set `A`
  * @example
  *   // Expect: "string"
- *   SymmetricDifference<string | null | undefined>;
+ *   NonNullable<string | null | undefined>;
  */
 // type NonNullable - built-in
 
