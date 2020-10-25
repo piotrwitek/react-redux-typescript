@@ -4,6 +4,44 @@ exports[`Assign const result: Assign<{}, Omit<T, 'age'>> = rest (type) should ma
 
 exports[`Assign testType<Assign<Props, NewProps>>() (type) should match snapshot 1`] = `"Pick<Pick<Props, \\"name\\" | \\"visible\\"> & Pick<NewProps, \\"age\\"> & Pick<NewProps, \\"other\\">, \\"name\\" | \\"age\\" | \\"visible\\" | \\"other\\">"`;
 
+exports[`AugmentedMutable testType<AugmentedMutable<Readonly<Props>, 'name' | 'age'>>({
+      name: 'Yolo',
+      age: 99,
+      visible: true,
+    }) (type) should match snapshot 1`] = `"AugmentedMutable<Readonly<Props>, \\"name\\" | \\"age\\">"`;
+
+exports[`AugmentedMutable testType<AugmentedMutable<Readonly<Props>>>({
+      name: 'Yolo',
+      age: 99,
+      visible: true,
+    }) (type) should match snapshot 1`] = `"AugmentedMutable<Readonly<Props>, \\"name\\" | \\"age\\" | \\"visible\\">"`;
+
+exports[`AugmentedMutable testType<AugmentedMutable<Readonly<Props>>['age']>(99) (type) should match snapshot 1`] = `"number"`;
+
+exports[`AugmentedMutable testType<AugmentedMutable<Readonly<Props>>['name']>('Yolo') (type) should match snapshot 1`] = `"string"`;
+
+exports[`AugmentedMutable testType<AugmentedMutable<Readonly<Props>>['visible']>(true) (type) should match snapshot 1`] = `"boolean"`;
+
+exports[`AugmentedReadonly testType<AugmentedReadonly<Props, 'name' | 'age'>>({
+      name: 'Yolo',
+      age: 99,
+      visible: true,
+    }) (type) should match snapshot 1`] = `"AugmentedReadonly<Props, \\"name\\" | \\"age\\">"`;
+
+exports[`AugmentedReadonly testType<AugmentedReadonly<Props>>({
+      name: 'Yolo',
+      age: 99,
+      visible: true,
+    }) (type) should match snapshot 1`] = `"AugmentedReadonly<Props, \\"name\\" | \\"age\\" | \\"visible\\">"`;
+
+exports[`AugmentedReadonly testType<AugmentedReadonly<Props>['age']>() (type) should match snapshot 1`] = `"number"`;
+
+exports[`AugmentedReadonly testType<AugmentedReadonly<Props>['name']>() (type) should match snapshot 1`] = `"string"`;
+
+exports[`AugmentedReadonly testType<AugmentedReadonly<Props>['visible']>() (type) should match snapshot 1`] = `"boolean"`;
+
+exports[`AugmentedReadonly testType<ReadonlyKeys<AugmentedReadonly<Props, 'name' | 'age'>>>() (type) should match snapshot 1`] = `"\\"name\\" | \\"age\\""`;
+
 exports[`AugmentedRequired testType<AugmentedRequired<Partial<Props>, 'age' | 'visible'>>({
       age: 99,
       visible: true,
@@ -111,18 +149,6 @@ exports[`Intersection testType<Intersection<Props | NewProps, DefaultProps>>() (
 
 exports[`Intersection testType<Intersection<Props, DefaultProps>>() (type) should match snapshot 1`] = `"Pick<Props, \\"age\\">"`;
 
-exports[`Mutable testType<Mutable<Readonly<Props>>>({
-      name: 'Yolo',
-      age: 99,
-      visible: true,
-    }) (type) should match snapshot 1`] = `"Mutable<Readonly<Props>>"`;
-
-exports[`Mutable testType<Mutable<Readonly<Props>>['age']>(99) (type) should match snapshot 1`] = `"number"`;
-
-exports[`Mutable testType<Mutable<Readonly<Props>>['name']>('Yolo') (type) should match snapshot 1`] = `"string"`;
-
-exports[`Mutable testType<Mutable<Readonly<Props>>['visible']>(true) (type) should match snapshot 1`] = `"boolean"`;
-
 exports[`MutableKeys testType<MutableKeys<ReadWriteProps>>() (type) should match snapshot 1`] = `"\\"b\\""`;
 
 exports[`NonFunctionKeys testType<NonFunctionKeys<MixedProps>>() (type) should match snapshot 1`] = `"\\"name\\" | \\"someKeys\\""`;
@@ -159,13 +185,16 @@ exports[`OmitByValueExact testType<OmitByValueExact<T, number>>() (type) should 
 
 exports[`OmitByValueExact testType<keyof OmitByValueExact<RequiredOptionalProps, number>>() (type) should match snapshot 1`] = `"\\"reqUndef\\" | \\"opt\\" | \\"optUndef\\""`;
 
-exports[`Optional testType<Optional<Props, 'age' | 'visible'>>({ name: 'Yolo' }) (type) should match snapshot 1`] = `"Optional<Props, \\"age\\" | \\"visible\\">"`;
+exports[`Optional testType<AugmentedPartial<Props, 'age' | 'visible'>>({
+      name: 'Yolo',
+      age: 99,
+    }) (type) should match snapshot 1`] = `"AugmentedPartial<Props, \\"age\\" | \\"visible\\">"`;
 
-exports[`Optional testType<Optional<Props, 'age' | 'visible'>>({ name: 'Yolo', age: 99 }) (type) should match snapshot 1`] = `"Optional<Props, \\"age\\" | \\"visible\\">"`;
+exports[`Optional testType<AugmentedPartial<Props, 'age' | 'visible'>>({ name: 'Yolo' }) (type) should match snapshot 1`] = `"AugmentedPartial<Props, \\"age\\" | \\"visible\\">"`;
 
-exports[`Optional testType<Optional<Props>>({ age: 99 }) (type) should match snapshot 1`] = `"Optional<Props, \\"name\\" | \\"age\\" | \\"visible\\">"`;
+exports[`Optional testType<AugmentedPartial<Props>>({ age: 99 }) (type) should match snapshot 1`] = `"AugmentedPartial<Props, \\"name\\" | \\"age\\" | \\"visible\\">"`;
 
-exports[`Optional testType<Optional<Props>>({}) (type) should match snapshot 1`] = `"Optional<Props, \\"name\\" | \\"age\\" | \\"visible\\">"`;
+exports[`Optional testType<AugmentedPartial<Props>>({}) (type) should match snapshot 1`] = `"AugmentedPartial<Props, \\"name\\" | \\"age\\" | \\"visible\\">"`;
 
 exports[`OptionalKeys testType<OptionalKeys<RequiredOptionalProps>>() (type) should match snapshot 1`] = `"\\"opt\\" | \\"optUndef\\""`;
 

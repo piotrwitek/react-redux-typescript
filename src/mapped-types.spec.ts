@@ -36,11 +36,12 @@ import {
   OptionalKeys,
   PickByValueExact,
   OmitByValueExact,
-  Optional,
+  AugmentedPartial,
   ValuesType,
   AugmentedRequired,
   UnionToIntersection,
-  Mutable,
+  AugmentedMutable,
+  AugmentedReadonly,
 } from './mapped-types';
 
 /**
@@ -498,14 +499,17 @@ type RequiredOptionalProps = {
 // @dts-jest:group Optional
 {
   // @dts-jest:pass:snap
-  testType<Optional<Props>>({});
+  testType<AugmentedPartial<Props>>({});
   // @dts-jest:pass:snap
-  testType<Optional<Props>>({ age: 99 });
+  testType<AugmentedPartial<Props>>({ age: 99 });
 
   // @dts-jest:pass:snap
-  testType<Optional<Props, 'age' | 'visible'>>({ name: 'Yolo' });
+  testType<AugmentedPartial<Props, 'age' | 'visible'>>({ name: 'Yolo' });
   // @dts-jest:pass:snap
-  testType<Optional<Props, 'age' | 'visible'>>({ name: 'Yolo', age: 99 });
+  testType<AugmentedPartial<Props, 'age' | 'visible'>>({
+    name: 'Yolo',
+    age: 99,
+  });
 }
 
 // @dts-jest:group ValuesType
@@ -572,21 +576,57 @@ type RequiredOptionalProps = {
   testType<UnionToIntersection<'name' | 'age'>>();
 }
 
-// @dts-jest:group Mutable
+// @dts-jest:group AugmentedMutable
 {
   // @dts-jest:pass:snap
-  testType<Mutable<Readonly<Props>>>({
+  testType<AugmentedMutable<Readonly<Props>>>({
     name: 'Yolo',
     age: 99,
     visible: true,
   });
 
   // @dts-jest:pass:snap
-  testType<Mutable<Readonly<Props>>['name']>('Yolo');
+  testType<AugmentedMutable<Readonly<Props>, 'name' | 'age'>>({
+    name: 'Yolo',
+    age: 99,
+    visible: true,
+  });
 
   // @dts-jest:pass:snap
-  testType<Mutable<Readonly<Props>>['age']>(99);
+  testType<AugmentedMutable<Readonly<Props>>['name']>('Yolo');
 
   // @dts-jest:pass:snap
-  testType<Mutable<Readonly<Props>>['visible']>(true);
+  testType<AugmentedMutable<Readonly<Props>>['age']>(99);
+
+  // @dts-jest:pass:snap
+  testType<AugmentedMutable<Readonly<Props>>['visible']>(true);
+}
+
+// @dts-jest:group AugmentedReadonly
+{
+  // @dts-jest:pass:snap
+  testType<AugmentedReadonly<Props>>({
+    name: 'Yolo',
+    age: 99,
+    visible: true,
+  });
+
+  // @dts-jest:pass:snap
+  testType<AugmentedReadonly<Props, 'name' | 'age'>>({
+    name: 'Yolo',
+    age: 99,
+    visible: true,
+  });
+
+  // @dts-jest:pass:snap
+  testType<ReadonlyKeys<AugmentedReadonly<Props, 'name' | 'age'>>>();
+
+  // @dts-jest:pass:snap
+  testType<AugmentedReadonly<Props>['name']>();
+
+  // @dts-jest:pass:snap
+  testType<AugmentedReadonly<Props>['age']>();
+
+  // @dts-jest:pass:snap
+  testType<AugmentedReadonly<Props>['visible']>();
 }

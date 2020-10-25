@@ -110,14 +110,13 @@ We are open for contributions. If you're planning to contribute please make sure
 * [`ReadonlyKeys<T>`](#readonlykeyst)
 * [`RequiredKeys<T>`](#requiredkeyst)
 * [`OptionalKeys<T>`](#optionalkeyst)
-* [`Optional<T, K>`](#optionalt-k)
-* [`Partial<T>`](#partialt) _(built-in)_
+* [`Partial<T, K>`](#partialt-k)
 * [`DeepPartial<T>`](#deeppartialt)
 * [`Required<T, K>`](#requiredt-k)
 * [`DeepRequired<T>`](#deeprequiredt)
-* [`Readonly<T>`](#readonlyt) _(built-in)_
+* [`Readonly<T>`](#readonlyt-k)
 * [`DeepReadonly<T>`](#deepreadonlyt)
-* [`Mutable<T>`](#mutablet)
+* [`Mutable<T, K>`](#mutablet-k)
 * [`Pick<T, K>` _(built-in)_](#pickt-k-built-in)
 * [`Omit<T, K>`](#omitt-k) _(built-in)_
 * [`PickByValue<T, ValueType>`](#pickbyvaluet-valuetype)
@@ -422,26 +421,6 @@ type Keys = OptionalKeys<Props>;
 
 [⇧ back to top](#table-of-contents)
 
-### `Optional<T, K>`
-
-From `T` make a set of properties by key `K` become optional
-
-**Usage:**
-
-```ts
-import { Optional } from 'utility-types';
-
-type Props = { name: string; age: number; visible: boolean; };
-
-// Expect: { name?: string; age?: number; visible?: boolean; }
-type Props = Optional<Props>
-// Expect: { name: string; age?: number; visible?: boolean; }
-type Props = Optional<Props, 'age' | 'visible'>;
-```
-
-[⇧ back to top](#table-of-contents)
-
-
 ### `Pick<T, K>` _(built-in)_
 
 From `T` pick a set of properties by key `K`
@@ -670,9 +649,24 @@ type BinaryItems = ValuesType<BinaryArray>;
 
 [⇧ back to top](#table-of-contents)
 
-### `Partial<T>`
+### `Partial<T, K>`
 
-Make all properties of object type optional
+From `T` make a set of properties by key `K` become optional
+
+Alias: `Optional<T, K>`
+
+**Usage:**
+
+```ts
+import { Partial } from 'utility-types';
+
+type Props = { name: string; age: number; visible: boolean; };
+
+// Expect: { name?: string; age?: number; visible?: boolean; }
+type Props = Partial<Props>
+// Expect: { name: string; age?: number; visible?: boolean; }
+type Props = Partial<Props, 'age' | 'visible'>;
+```
 
 [⇧ back to top](#table-of-contents)
 
@@ -695,17 +689,41 @@ type Props = Required<Props, 'age' | 'visible'>;
 
 [⇧ back to top](#table-of-contents)
 
-### `Readonly<T>`
+### `Readonly<T, K>`
 
-Make all properties of object type readonly
+From `T`, make a set of properties, whose keys are in the union `K`, readonly
+
+```ts
+import { Readonly } from 'utility-types';
+
+type Props = {
+  name: string;
+  age: number;
+  visible: boolean;
+};
+
+// Expect: {
+//   readonly name: string;
+//   readonly age: number;
+//   readonly visible: boolean;
+// }
+Readonly<Props>;
+
+// Expect: {
+//   name: string;
+//   readonly age: number;
+//   readonly visible: boolean;
+// }
+Readonly<Props, 'age' | 'visible'>;
+```
 
 [⇧ back to top](#table-of-contents)
 
-### `Mutable<T>`
+### `Mutable<T, K>`
 
-From `T` make all properties become mutable
+From `T`, make a set of properties, whose keys are in the union `K`, mutable
 
-Alias: `Writable<T>`
+Alias: `Writable<T, K>`
 
 ```ts
 import { Mutable } from 'utility-types';
@@ -718,6 +736,9 @@ type Props = {
 
 // Expect: { name: string; age: number; visible: boolean; }
 Mutable<Props>;
+
+// Expect: { readonly name: string; age: number; visible: boolean; }
+Mutable<Props, 'age' | 'visible'>;
 ```
 
 [⇧ back to top](#table-of-contents)
@@ -856,6 +877,8 @@ type RequiredNestedProps = DeepNonNullable<NestedProps>;
 ### `DeepPartial<T>`
 
 Partial that works for deeply nested structures
+
+Alias: `DeepOptional<T>` 
 
 **Usage:**
 

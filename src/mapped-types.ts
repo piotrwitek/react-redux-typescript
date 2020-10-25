@@ -508,6 +508,7 @@ export type DeepPartial<T> = T extends Function
   : T extends object
   ? _DeepPartialObject<T>
   : T | undefined;
+export type DeepOptional<T> = DeepPartial<T>;
 /** @private */
 // tslint:disable-next-line:class-name
 export interface _DeepPartialArray<T> extends Array<DeepPartial<T>> {}
@@ -537,7 +538,7 @@ export type _DeepPartialObject<T> = { [P in keyof T]?: DeepPartial<T[P]> };
 export type Brand<T, U> = T & { __brand: U };
 
 /**
- * Optional
+ * Partial
  * @desc From `T` make a set of properties by key `K` become optional
  * @example
  *    type Props = {
@@ -547,16 +548,19 @@ export type Brand<T, U> = T & { __brand: U };
  *    };
  *
  *    // Expect: { name?: string; age?: number; visible?: boolean; }
- *    type Props = Optional<Props>;
+ *    type Props = Partial<Props>;
  *
  *    // Expect: { name: string; age?: number; visible?: boolean; }
- *    type Props = Optional<Props, 'age' | 'visible'>;
+ *    type Props = Partial<Props, 'age' | 'visible'>;
  */
-export type Optional<T extends object, K extends keyof T = keyof T> = Omit<
-  T,
-  K
-> &
-  Partial<Pick<T, K>>;
+export type AugmentedPartial<
+  T extends object,
+  K extends keyof T = keyof T
+> = Omit<T, K> & Partial<Pick<T, K>>;
+export type Optional<
+  T extends object,
+  K extends keyof T = keyof T
+> = AugmentedPartial<T, K>;
 
 /**
  * ValuesType
@@ -632,9 +636,11 @@ export type UnionToIntersection<U> = (U extends any
   ? I
   : never;
 
+type Mutable<T> = { -readonly [P in keyof T]: T[P] };
+
 /**
  * Mutable
- * @desc From `T` make all properties become mutable
+ * @desc From `T`, make a set of properties, whose keys are in the union `K`, mutable
  * @example
  *    type Props = {
  *      readonly name: string;
@@ -644,6 +650,37 @@ export type UnionToIntersection<U> = (U extends any
  *
  *    // Expect: { name: string; age: number; visible: boolean; }
  *    Mutable<Props>;
+ *
+ *    // Expect: { readonly name: string; age: number; visible: boolean; }
+ *    Mutable<Props, 'age' | 'visible'>;
  */
-export type Mutable<T> = { -readonly [P in keyof T]: T[P] };
-export type Writable<T> = Mutable<T>;
+export type AugmentedMutable<T, K extends keyof T = keyof T> = Omit<T, K> &
+  Mutable<Pick<T, K>>;
+export type Writable<T, K extends keyof T = keyof T> = AugmentedMutable<T, K>;
+
+/**
+ * Readonly
+ * @desc From `T`, make a set of properties, whose keys are in the union `K`, readonly
+ * @example
+ *    type Props = {
+ *      name: string;
+ *      age: number;
+ *      visible: boolean;
+ *    };
+ *
+ *    // Expect: {
+ *    //   readonly name: string;
+ *    //   readonly age: number;
+ *    //   readonly visible: boolean;
+ *    // }
+ *    Readonly<Props>;
+ *
+ *    // Expect: {
+ *    //   name: string;
+ *    //   readonly age: number;
+ *    //   readonly visible: boolean;
+ *    // }
+ *    Readonly<Props, 'age' | 'visible'>;
+ */
+export type AugmentedReadonly<T, K extends keyof T = keyof T> = Omit<T, K> &
+  Readonly<Pick<T, K>>;
