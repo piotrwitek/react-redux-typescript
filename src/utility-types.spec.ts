@@ -9,6 +9,7 @@ import {
   $ElementType,
   $Shape,
   $NonMaybeType,
+  $ObjMap,
   Class,
   mixed,
 } from './utility-types';
@@ -19,6 +20,11 @@ import { _DeepReadonlyObject } from './mapped-types';
 
 type Props = { name: string; age: number; visible: boolean };
 type DefaultProps = { age: number };
+type MappingProps = {
+  foo: () => boolean;
+  bar: () => string;
+  baz: string;
+};
 
 class Foo {}
 
@@ -119,4 +125,10 @@ class Foo {}
 {
   // @dts-jest:pass:snap
   testType<mixed>();
+}
+
+// @dts-jest:group $ObjMap
+{
+  // @dts-jest:pass:snap -> { foo: boolean; bar: string }
+  testType<$ObjMap<MappingProps>>();
 }

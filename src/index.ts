@@ -10,6 +10,7 @@ export {
   $ElementType,
   $Keys,
   $NonMaybeType,
+  $ObjMap,
   $PropertyType,
   $ReadOnly,
   $Shape,

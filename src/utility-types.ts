@@ -158,6 +158,31 @@ export type $NonMaybeType<T> = NonNullable<T>;
 export type Class<T> = new (...args: any[]) => T;
 
 /**
+ * $ObjMap
+ * @desc Mapps the type of each value in the object with the provided function type
+ * @see https://flow.org/en/docs/types/utilities/#toc-objmap
+ * @example
+ *  function mapValues<T extends { [key: string]: (...args: any[]) => any }>(o: T): $ObjMap<T> {
+ *    return (Object.keys(o) as $Keys<T>[]).reduce((acc, k) => ({
+ *       ...acc,
+ *       [k]: o[k]()
+ *    }), {} as $ObjMap<T>);
+ *  }
+ *
+ *  const o = {
+ *    a: () => true,
+ *    b: () => 'foo'
+ *  };
+ *
+ *  const result = mapValues(o).a // boolean
+ */
+export type $ObjMap<T extends Record<string, any>> = {
+  [P in keyof T]: T[P] extends (...args: any[]) => any
+    ? ReturnType<T[P]>
+    : never;
+};
+
+/**
  * mixed
  * @desc An arbitrary type that could be anything
  * @see https://flow.org/en/docs/types/mixed
