@@ -125,7 +125,7 @@ exports[`Mutable testType<Mutable<Readonly<Props>>['visible']>(true) (type) shou
 
 exports[`MutableKeys testType<MutableKeys<ReadWriteProps>>() (type) should match snapshot 1`] = `"\\"b\\""`;
 
-exports[`NonFunctionKeys testType<NonFunctionKeys<MixedProps>>() (type) should match snapshot 1`] = `"\\"name\\" | \\"someKeys\\""`;
+exports[`NonFunctionKeys testType<NonFunctionKeys<MixedProps>>() (type) should match snapshot 1`] = `"\\"name\\" | \\"someKeys\\" | \\"unNull\\""`;
 
 exports[`NonUndefined testType<NonUndefined<string | null | undefined>>() (type) should match snapshot 1`] = `"string | null"`;
 

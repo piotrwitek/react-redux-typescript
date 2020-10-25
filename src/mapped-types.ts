@@ -75,7 +75,9 @@ export type NonUndefined<A> = A extends undefined ? never : A;
  *   type Keys = FunctionKeys<MixedProps>;
  */
 export type FunctionKeys<T extends object> = {
-  [K in keyof T]-?: NonUndefined<T[K]> extends Function ? K : never;
+  [P in keyof T]-?: SetIntersection<NonNullable<T[P]>, Function> extends never
+    ? never
+    : P;
 }[keyof T];
 
 /**
