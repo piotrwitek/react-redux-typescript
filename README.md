@@ -118,7 +118,7 @@ We are open for contributions. If you're planning to contribute please make sure
 * [`Readonly<T>`](#readonlyt) _(built-in)_
 * [`DeepReadonly<T>`](#deepreadonlyt)
 * [`Mutable<T>`](#mutablet)
-* [`Pick<T, K>` _(built-in)_](#pickt-k-built-in)
+* [`Pick<T, K>`](#pickt-k) _(built-in)_
 * [`Omit<T, K>`](#omitt-k) _(built-in)_
 * [`PickByValue<T, ValueType>`](#pickbyvaluet-valuetype)
 * [`PickByValueExact<T, ValueType>`](#pickbyvalueexactt-valuetype)
@@ -442,7 +442,7 @@ type Props = Optional<Props, 'age' | 'visible'>;
 [⇧ back to top](#table-of-contents)
 
 
-### `Pick<T, K>` _(built-in)_
+### `Pick<T, K>`
 
 From `T` pick a set of properties by key `K`
 
