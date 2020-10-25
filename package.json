@@ -13,7 +13,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm run prettier:fix && npm run lint && npm run tsc && npm run test:update"
+      "pre-commit": "npm run build:deno && git add ./deno_dist",
+      "pre-push": "npm run test:deno && npm run prettier:fix && npm run lint && npm run tsc && npm run test:update"
     }
   },
   "scripts": {
@@ -24,16 +25,20 @@
     "lint": "tslint --project ./tsconfig.json",
     "tsc": "tsc -p . --noEmit",
     "tsc:watch": "tsc -p . --noEmit -w",
+    "test:deno": "deno run ./mod.ts",
     "test": "jest --config jest.config.json && dts-jest-remap ./src/*.spec.ts --rename {{basename}}.snap.{{extname}} --check",
     "test:update": "jest --config jest.config.json --no-cache -u && dts-jest-remap ./src/*.spec.ts --rename {{basename}}.snap.{{extname}}",
     "test:watch": "jest --config jest.config.json --watch",
-    "prebuild": "rm -rf dist/",
-    "build": "tsc -p ./tsconfig.build.json --outDir dist/",
+    "prebuild": "rm -rf dist/ deno_dist/ ./mod.ts",
+    "build:node": "tsc -p ./tsconfig.build.json",
+    "build:deno": "denoify --src './src'",
+    "build": "npm run build:node && npm run build:deno",
     "prepublishOnly": "npm run reinstall && npm run ci-check && npm run build"
   },
   "dependencies": {},
   "devDependencies": {
     "@types/jest": "24.0.22",
+    "denoify": "0.2.18",
     "dts-jest": "23.0.0",
     "husky": "3.0.9",
     "jest": "24.9.0",

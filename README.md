@@ -56,6 +56,13 @@ npm install utility-types
 yarn add utility-types
 ```
 
+```typescript
+// Deno
+// Import directly then use `deno run`.
+import { DeepRequired } from 'https://raw.githubusercontent.com/piotrwitek/utility-types/v3.10.0/mod.ts';
+
+```
+
 ## Compatibility Notes
 
 **TypeScript support**

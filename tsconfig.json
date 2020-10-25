@@ -7,7 +7,7 @@
     /* Others */
     "lib": ["dom", "es2017"],
     "types": ["jest"],
-    "outDir": "out/", // target for compiled files
+    "outDir": "dist/", // target for compiled files
     "target": "es5",
     "jsx": "react", // process JSX
     "module": "commonjs",
