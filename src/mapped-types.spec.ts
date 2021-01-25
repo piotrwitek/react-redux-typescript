@@ -41,6 +41,7 @@ import {
   AugmentedRequired,
   UnionToIntersection,
   Mutable,
+  TupleOf,
 } from './mapped-types';
 
 /**
@@ -589,4 +590,10 @@ type RequiredOptionalProps = {
 
   // @dts-jest:pass:snap
   testType<Mutable<Readonly<Props>>['visible']>(true);
+}
+
+// @dts-jest:group TupleOf
+{
+  // @dts-jest:pass:snap
+  testType<TupleOf<number, 3>>();
 }

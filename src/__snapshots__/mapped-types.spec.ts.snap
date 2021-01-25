@@ -250,3 +250,5 @@ exports[`ValuesType testType<ValuesType<number[]>>() (type) should match snapsho
 exports[`ValuesType testType<ValuesType<readonly [1, 2]>>() (type) should match snapshot 1`] = `"1 | 2"`;
 
 exports[`ValuesType testType<ValuesType<readonly symbol[]>>() (type) should match snapshot 1`] = `"symbol"`;
+
+exports[`TupleOf testType<TupleOf<number, 3>>() (type) should match snapshot 1`] = `"[number, number, number]"`;

@@ -48,6 +48,7 @@ export {
   SetIntersection,
   Subtract,
   SymmetricDifference,
+  TupleOf,
   Unionize,
   UnionToIntersection,
   ValuesType,

@@ -31,7 +31,6 @@
     "build": "tsc -p ./tsconfig.build.json --outDir dist/",
     "prepublishOnly": "npm run reinstall && npm run ci-check && npm run build"
   },
-  "dependencies": {},
   "devDependencies": {
     "@types/jest": "24.0.22",
     "dts-jest": "23.0.0",
@@ -40,7 +39,7 @@
     "prettier": "1.19.0",
     "ts-jest": "24.1.0",
     "tslint": "5.20.1",
-    "typescript": "3.7.2"
+    "typescript": "^4.1.3"
   },
   "keywords": [
     "typescript",

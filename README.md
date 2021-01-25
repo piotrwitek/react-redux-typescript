@@ -139,6 +139,7 @@ We are open for contributions. If you're planning to contribute please make sure
 * [`Unionize<T>`](#unionizet)
 * [`Brand<T, U>`](#brandt-u)
 * [`UnionToIntersection<U>`](#uniontointersectionu)
+* [`TupleOf<T, N>`](#uniontointersectionu)
 
 ## Flow's Utility Types
 
@@ -919,6 +920,21 @@ import { UnionToIntersection } from 'utility-types';
 
 // Expect: { name: string } & { age: number } & { visible: boolean }
 UnionToIntersection<{ name: string } | { age: number } | { visible: boolean }>
+```
+
+[⇧ back to top](#table-of-contents)
+
+### `TupleOf<T, N>`
+
+Creates an array with fixed length `N`
+
+**Usage:**
+
+```ts
+import { TupleOf } from 'utility-types';
+
+// Expect: [number, number, number]
+TupleOf<number, 3>
 ```
 
 [⇧ back to top](#table-of-contents)
