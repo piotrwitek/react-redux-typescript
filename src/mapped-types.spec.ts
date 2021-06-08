@@ -498,11 +498,6 @@ type RequiredOptionalProps = {
 // @dts-jest:group Optional
 {
   // @dts-jest:pass:snap
-  testType<Optional<Props>>({});
-  // @dts-jest:pass:snap
-  testType<Optional<Props>>({ age: 99 });
-
-  // @dts-jest:pass:snap
   testType<Optional<Props, 'age' | 'visible'>>({ name: 'Yolo' });
   // @dts-jest:pass:snap
   testType<Optional<Props, 'age' | 'visible'>>({ name: 'Yolo', age: 99 });

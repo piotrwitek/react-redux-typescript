@@ -552,11 +552,7 @@ export type Brand<T, U> = T & { __brand: U };
  *    // Expect: { name: string; age?: number; visible?: boolean; }
  *    type Props = Optional<Props, 'age' | 'visible'>;
  */
-export type Optional<T extends object, K extends keyof T = keyof T> = Omit<
-  T,
-  K
-> &
-  Partial<Pick<T, K>>;
+export type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
 
 /**
  * ValuesType

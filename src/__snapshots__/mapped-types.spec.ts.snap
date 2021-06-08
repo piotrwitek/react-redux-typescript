@@ -163,10 +163,6 @@ exports[`Optional testType<Optional<Props, 'age' | 'visible'>>({ name: 'Yolo' })
 
 exports[`Optional testType<Optional<Props, 'age' | 'visible'>>({ name: 'Yolo', age: 99 }) (type) should match snapshot 1`] = `"Optional<Props, \\"age\\" | \\"visible\\">"`;
 
-exports[`Optional testType<Optional<Props>>({ age: 99 }) (type) should match snapshot 1`] = `"Optional<Props, \\"name\\" | \\"age\\" | \\"visible\\">"`;
-
-exports[`Optional testType<Optional<Props>>({}) (type) should match snapshot 1`] = `"Optional<Props, \\"name\\" | \\"age\\" | \\"visible\\">"`;
-
 exports[`OptionalKeys testType<OptionalKeys<RequiredOptionalProps>>() (type) should match snapshot 1`] = `"\\"opt\\" | \\"optUndef\\""`;
 
 exports[`Overwrite const result: Overwrite<Omit<T, 'age'>, T> = rest (type) should match snapshot 1`] = `"any"`;
